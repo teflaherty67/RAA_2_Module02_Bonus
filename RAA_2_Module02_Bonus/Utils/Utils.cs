@@ -18,7 +18,7 @@ namespace RAA_2_Module02_Bonus
                 currentPanel = app.CreateRibbonPanel(tabName, panelName);
 
             return currentPanel;
-        }
+        }       
 
         internal static RibbonPanel GetRibbonPanelByName(UIControlledApplication app, string tabName, string panelName)
         {
@@ -29,6 +29,25 @@ namespace RAA_2_Module02_Bonus
             }
 
             return null;
+        }
+
+        internal static List<Category> GetAllCategories(Document curDoc)
+        {
+            // create a list to hold the categories
+            List<Category> m_Categories = new List<Category>();
+
+            // loop through the categories
+            foreach (Category curCat in curDoc.Settings.Categories)
+            {
+                // add the current category to the list
+                m_Categories.Add(curCat);
+            }
+
+            // sort the list alphabetically
+            List<Category> m_SortedList = m_Categories.OrderBy(x => x.Name).ToList();
+
+            // return the sorted list
+            return m_SortedList;
         }
     }
 }

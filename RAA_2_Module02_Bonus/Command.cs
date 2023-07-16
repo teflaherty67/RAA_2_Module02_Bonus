@@ -24,12 +24,13 @@ namespace RAA_2_Module02_Bonus
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Application app = uiapp.Application;
-            Document doc = uidoc.Document;
+            Document curDoc = uidoc.Document;
 
             // put any code needed for the form here
+            List<Category> categories = Utils.GetAllCategories(curDoc);
 
             // open form
-            MyForm currentForm = new MyForm()
+            MyForm curForm = new MyForm(categories)
             {
                 Width = 800,
                 Height = 450,
@@ -37,7 +38,7 @@ namespace RAA_2_Module02_Bonus
                 Topmost = true,
             };
 
-            currentForm.ShowDialog();
+            curForm.ShowDialog();
 
             // get form data and do something
 

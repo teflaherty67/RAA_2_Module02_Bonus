@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 
 
 namespace RAA_2_Module02_Bonus
@@ -21,7 +23,7 @@ namespace RAA_2_Module02_Bonus
     /// </summary>
     public partial class MyForm : Window
     {
-        public MyForm()
+        public MyForm(List<Category> catList)
         {
             InitializeComponent();
         }

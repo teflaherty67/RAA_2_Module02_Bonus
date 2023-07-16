@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command RAA_2_Module02_Bonus</Text>
+    <Description>Some description for RAA_2_Module02_Bonus</Description>
+    <Assembly>RAA_2_Module02_Bonus.dll</Assembly>
+    <FullClassName>RAA_2_Module02_Bonus.Command</FullClassName>
+    <ClientId>1fc229ba-e323-46bb-9463-f6257660ed39</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application RAA_2_Module02_Bonus</Name>
+    <Assembly>RAA_2_Module02_Bonus.dll</Assembly>
+    <FullClassName>RAA_2_Module02_Bonus.App</FullClassName>
+    <ClientId>9bc6a980-12b0-4dab-b9c7-b13c37d45e4c</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+</RevitAddIns>

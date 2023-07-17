@@ -30,9 +30,9 @@ namespace RAA_2_Module02_Bonus
             List<Category> categories = Utils.GetAllCategories(curDoc);
 
             // open form
-            MyForm curForm = new MyForm(categories)
+            MyForm curForm = new MyForm(curDoc, categories)
             {
-                Width = 800,
+                Width = 550,
                 Height = 450,
                 WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen,
                 Topmost = true,

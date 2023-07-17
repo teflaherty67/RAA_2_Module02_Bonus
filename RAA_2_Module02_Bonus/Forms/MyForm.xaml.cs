@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,9 +24,28 @@ namespace RAA_2_Module02_Bonus
     /// </summary>
     public partial class MyForm : Window
     {
-        public MyForm(List<Category> catList)
+        public string catName;
+
+        public Document Doc;
+        public MyForm(Document curDoc, List<Category> catList)
         {
             InitializeComponent();
+
+            Doc = curDoc;
+
+            foreach (Category curCat in catList)
+            { 
+                cmbCategory.Items.Add(curCat.Name);
+            }
+        }
+
+        private void cmbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            catName = cmbCategory.SelectedItem.ToString();
+
+            Category selectedCat = Utils.GetCategoryByName(Doc, catName);
+
+
         }
     }
 }

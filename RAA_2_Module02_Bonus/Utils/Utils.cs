@@ -49,5 +49,10 @@ namespace RAA_2_Module02_Bonus
             // return the sorted list
             return m_SortedList;
         }
+
+        internal static Category GetCategoryByName(Document doc, string catName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

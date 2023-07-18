@@ -3,6 +3,7 @@ using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,9 +51,19 @@ namespace RAA_2_Module02_Bonus
             return m_SortedList;
         }
 
-        internal static Category GetCategoryByName(Document doc, string catName)
+        internal static Category GetCategoryByName(Document curDoc, string catName)
         {
-            throw new NotImplementedException();
+            // get all the categories
+            List<Category> m_categories = GetAllCategories(curDoc);
+
+            // loop through the list to find a match
+            foreach (Category curCat in m_categories)
+            {
+                if (curCat.Name == catName)
+                    return curCat;
+            }
+
+            return null;
         }
     }
 }

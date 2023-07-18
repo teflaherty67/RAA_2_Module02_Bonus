@@ -45,7 +45,20 @@ namespace RAA_2_Module02_Bonus
 
             Category selectedCat = Utils.GetCategoryByName(Doc, catName);
 
+            if (selectedCat != null)
+            {
+                FilteredElementCollector m_col = new FilteredElementCollector(Doc)
+                    .OfCategoryId(selectedCat.Id)
+                    .WhereElementIsElementType();
 
+                List<Element> m_groupedList = m_col.GroupBy(x => x.Name).Select(x => x.First()).ToList();
+                List<Element> m_sortedList = m_groupedList.OrderBy(x => x.Name).ToList();
+
+                foreach(Element curElem in m_sortedList)
+                {
+                    lbxTypes.Items.Add(curElem.Name);
+                }
+            }
         }
     }
 }

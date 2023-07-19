@@ -32,8 +32,8 @@ namespace RAA_2_Module02_Bonus
             // open form
             MyForm curForm = new MyForm(curDoc, categories)
             {
-                Width = 550,
-                Height = 450,
+                Width = 450,
+                Height = 550,
                 WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen,
                 Topmost = true,
             };

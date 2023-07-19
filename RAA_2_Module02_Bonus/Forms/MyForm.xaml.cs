@@ -25,8 +25,9 @@ namespace RAA_2_Module02_Bonus
     public partial class MyForm : Window
     {
         public string catName;
-
         public Document Doc;
+        public List<string> TypeNames;
+
         public MyForm(Document curDoc, List<Category> catList)
         {
             InitializeComponent();
@@ -41,6 +42,9 @@ namespace RAA_2_Module02_Bonus
 
         private void cmbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // clear the listbox
+            lbxTypes.Items.Clear();
+
             catName = cmbCategory.SelectedItem.ToString();
 
             Category selectedCat = Utils.GetCategoryByName(Doc, catName);
@@ -58,6 +62,16 @@ namespace RAA_2_Module02_Bonus
                 {
                     lbxTypes.Items.Add(curElem.Name);
                 }
+            }
+        }
+
+        private void lbxTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TypeNames = new List<string>();
+
+            foreach (string type in lbxTypes.SelectedItems)
+            {
+
             }
         }
     }

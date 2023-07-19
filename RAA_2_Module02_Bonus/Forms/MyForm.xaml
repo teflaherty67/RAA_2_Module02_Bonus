@@ -23,7 +23,7 @@
         <Label Content="Select a Category" Grid.Row="1"/>
         <ComboBox x:Name="cmbCategory" Grid.Row="2" SelectionChanged="cmbCategory_SelectionChanged"/>
         <Label Content="Select Types:" Grid.Row="3"/>
-        <ListBox x:Name="lbxTypes" Grid.Row="4"/>
+        <ListBox x:Name="lbxTypes" Grid.Row="4" SelectionMode="Extended" SelectionChanged="lbxTypes_SelectionChanged"/>
         <Label Grid.Row="5" Content="Select a Parameter:"/>
         <ComboBox x:Name="cmbParameter" Grid.Row="6"/>
         <Label x:Name="lblValue" Grid.Row="7" Content="Set Parameter Value:"/>

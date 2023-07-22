@@ -71,8 +71,10 @@ namespace RAA_2_Module02_Bonus
 
             foreach (string type in lbxTypes.SelectedItems)
             {
-
+                TypeNames.Add(type);               
             }
+
+            List<ElementType> selectedElemTypes = Utils.GetElementTypesByName(Doc,catName, TypeNames);
         }
     }
 }

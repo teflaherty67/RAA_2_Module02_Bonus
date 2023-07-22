@@ -65,5 +65,34 @@ namespace RAA_2_Module02_Bonus
 
             return null;
         }
+
+        internal static List<ElementType> GetElementTypesByName(Document doc, string catName, List<string> typeNames)
+        {
+            List<ElementType> m_types = new List<ElementType>();
+
+            foreach (string type in typeNames)
+            {
+                ElementType curType = GetElementTypeByName(doc, catName, type);
+
+                if (curType != null)
+                    m_types.Add(curType);
+            }
+
+            return m_types;            
+        }
+
+        private static ElementType GetElementTypeByName(Document doc, string catName, string name)
+        {
+            FilteredElementCollector m_col = new FilteredElementCollector(doc)
+                .OfClass(typeof(ElementType));
+
+            foreach (ElementType curType in m_col)
+            {
+                if (curType.Name == name && curType.Category.Name == catName)
+                    return curType;
+            }
+
+            return null;
+        }
     }
 }

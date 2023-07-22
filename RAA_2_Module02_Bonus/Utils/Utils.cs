@@ -94,5 +94,18 @@ namespace RAA_2_Module02_Bonus
 
             return null;
         }
+
+        internal static List<Parameter> GetAllParametersFromElement(ElementType curType)
+        {
+            List<Parameter> m_returnList = new List<Parameter>();
+
+            // loop through the parameters of curType
+            foreach (Parameter curParam in curType.Parameters)
+            {
+                m_returnList.Add(curParam);
+            }
+
+            return m_returnList;
+        }
     }
 }

@@ -75,6 +75,18 @@ namespace RAA_2_Module02_Bonus
             }
 
             List<ElementType> selectedElemTypes = Utils.GetElementTypesByName(Doc,catName, TypeNames);
+
+            if (selectedElemTypes.Count > 0)
+            {
+                // create a list to hold the parameters from the types
+                List<Parameter> paramList = new List<Parameter>();
+
+                // llop through the tpyes and get all parameters
+                foreach (ElementType curType in selectedElemTypes)
+                {
+                    paramList.AddRange(Utils.GetAllParametersFromElement(curType));
+                }
+            }
         }
     }
 }

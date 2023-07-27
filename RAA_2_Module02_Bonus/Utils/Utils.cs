@@ -107,5 +107,22 @@ namespace RAA_2_Module02_Bonus
 
             return m_returnList;
         }
+
+        internal static Parameter GetParameterByName(Document doc, string catName, string typeName, string paramName)
+        {
+            ElementType curType = GetElementTypeByName(doc, catName, typeName);
+
+            Parameter curParam = curType.GetParameters(paramName).FirstOrDefault();
+
+            if (curParam != null) 
+                return curParam;
+
+            return null;
+        }
+
+        internal static List<Parameter> GetParametersByName(Document curDoc, string catName, List<string> typeNames, string paramName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -42,7 +42,5 @@ namespace RAA_2_Module02_Bonus
         {
             return Result.Succeeded;
         }
-
-
     }
 }

@@ -25,12 +25,12 @@
         <Label Content="Select Types:" Grid.Row="3"/>
         <ListBox x:Name="lbxTypes" Grid.Row="4" SelectionMode="Extended" SelectionChanged="lbxTypes_SelectionChanged"/>
         <Label Grid.Row="5" Content="Select a Parameter:"/>
-        <ComboBox x:Name="cmbParameter" Grid.Row="6"/>
+        <ComboBox x:Name="cmbParameter" Grid.Row="6" SelectionChanged="cmbParameter_SelectionChanged"/>
         <Label x:Name="lblValue" Grid.Row="7" Content="Set Parameter Value:"/>
         <TextBox x:Name="tbxValue" Grid.Row="8"/>
         <StackPanel Grid.Row="9" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <Button x:Name="btnOK" Width="90" Height="25" Content="OK" Margin="0,0,10,0"/>
-            <Button x:Name="btnCancel" Width="90" Height="25" Content="Cancel"/>
+            <Button x:Name="btnOK" Width="90" Height="25" Content="OK" Margin="0,0,10,0" Click="btnOK_Click"/>
+            <Button x:Name="btnCancel" Width="90" Height="25" Content="Cancel" Click="btnCancel_Click"/>
         </StackPanel>
     </Grid>
 </Window>

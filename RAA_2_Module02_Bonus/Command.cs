@@ -42,6 +42,12 @@ namespace RAA_2_Module02_Bonus
 
             // get form data and do something
 
+            if (curForm.DialogResult == false)
+                return Result.Cancelled;
+
+            List<Parameter> paramList = Utils.GetParametersByName(curDoc, curForm.catName, 
+                curForm.TypeNames, curForm.ParamName);
+
             return Result.Succeeded;
         }
 

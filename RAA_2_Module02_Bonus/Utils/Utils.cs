@@ -122,7 +122,17 @@ namespace RAA_2_Module02_Bonus
 
         internal static List<Parameter> GetParametersByName(Document curDoc, string catName, List<string> typeNames, string paramName)
         {
-            throw new NotImplementedException();
+            List<Parameter> m_returnList = new List<Parameter>();
+
+            foreach (string typeName in typeNames)
+            {
+                Parameter curParam = GetParameterByName(curDoc, catName, typeName, paramName);
+
+                if (curParam != null)
+                    m_returnList.Add(curParam);
+            }
+
+            return m_returnList;
         }
     }
 }

@@ -48,6 +48,38 @@ namespace RAA_2_Module02_Bonus
             List<Parameter> paramList = Utils.GetParametersByName(curDoc, curForm.catName, 
                 curForm.TypeNames, curForm.ParamName);
 
+            if (paramList.Count > 0)
+            {
+                using (Transaction t = new Transaction(curDoc))
+                {
+                    t.Start("Set type parameters");
+
+                    foreach (Parameter param in paramList)
+                    {
+                        string newValue = curForm.GetNewValue();
+
+                        if (curForm.ParamDataType == "double")
+                        {
+                            double paramDouble = Convert.ToDouble(newValue);
+                            param.Set(paramDouble);
+                        }
+                        else if (curForm.ParamDataType == "integer")
+                        {
+                            int paramInt = Convert.ToInt32(newValue);
+                            param.Set(paramInt);
+                        }
+                        else if (curForm.ParamDataType == "string")
+                        {
+                            param.Set(newValue);
+                        }
+                    }
+
+                    t.Commit();
+                }
+            }
+
+            TaskDialog.Show("Complete", "Updated " + paramList.Count.ToString() + " types.");
+
             return Result.Succeeded;
         }
 

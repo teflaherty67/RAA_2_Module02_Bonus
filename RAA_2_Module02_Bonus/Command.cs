@@ -21,16 +21,10 @@ namespace RAA_2_Module02_Bonus
           ref string message,
           ElementSet elements)
         {
-            UIApplication uiapp = commandData.Application;
-            UIDocument uidoc = uiapp.ActiveUIDocument;
-            Application app = uiapp.Application;
-            Document curDoc = uidoc.Document;
-
-            // put any code needed for the form here
-            List<Category> categories = Utils.GetAllCategories(curDoc);
-
+            UIApplication uiapp = commandData.Application;         
+                       
             // open form
-            MyForm curForm = new MyForm(curDoc, categories)
+            MyForm curForm = new MyForm(uiapp)
             {
                 Width = 450,
                 Height = 550,
@@ -38,47 +32,7 @@ namespace RAA_2_Module02_Bonus
                 Topmost = true,
             };
 
-            curForm.ShowDialog();
-
-            // get form data and do something
-
-            if (curForm.DialogResult == false)
-                return Result.Cancelled;
-
-            List<Parameter> paramList = Utils.GetParametersByName(curDoc, curForm.catName, 
-                curForm.TypeNames, curForm.ParamName);
-
-            if (paramList.Count > 0)
-            {
-                using (Transaction t = new Transaction(curDoc))
-                {
-                    t.Start("Set type parameters");
-
-                    foreach (Parameter param in paramList)
-                    {
-                        string newValue = curForm.GetNewValue();
-
-                        if (curForm.ParamDataType == "double")
-                        {
-                            double paramDouble = Convert.ToDouble(newValue);
-                            param.Set(paramDouble);
-                        }
-                        else if (curForm.ParamDataType == "integer")
-                        {
-                            int paramInt = Convert.ToInt32(newValue);
-                            param.Set(paramInt);
-                        }
-                        else if (curForm.ParamDataType == "string")
-                        {
-                            param.Set(newValue);
-                        }
-                    }
-
-                    t.Commit();
-                }
-            }
-
-            TaskDialog.Show("Complete", "Updated " + paramList.Count.ToString() + " types.");
+            curForm.ShowDialog();           
 
             return Result.Succeeded;
         }

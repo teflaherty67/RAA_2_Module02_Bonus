@@ -91,7 +91,7 @@ namespace RAA_2_Module02_Bonus._Model
             return null;
         }
 
-        internal static List<Parameter> GetAllParametersFromElement(ElementType curType)
+        internal List<Parameter> GetAllParametersFromElement(ElementType curType)
         {
             List<Parameter> m_returnList = new List<Parameter>();
 
@@ -129,6 +129,21 @@ namespace RAA_2_Module02_Bonus._Model
             }
 
             return m_returnList;
+        }
+
+        internal List<Parameter> GetAllParametersFromElementTypes(List<Element> selectedElemTypes)
+        {
+            List<Parameter> paramList = new List<Parameter>();
+
+            foreach (Element curType in selectedElemTypes)
+            {
+                paramList.AddRange(GetAllParametersFromElement(curType));
+            }
+
+            List<Parameter> groupedList = paramList.GroupBy(x => x.Definition.Name).Select(x => x.First()).ToList();
+            List<Parameter> sortedList = groupedList.OrderBy(x => x.Definition.Name).ToList();
+
+            return sortedList;
         }
     }
 }

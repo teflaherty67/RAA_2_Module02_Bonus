@@ -21,9 +21,14 @@
         </Grid.RowDefinitions>
         <Label Content="Batch Type Parameter Setter" FontWeight="Bold" FontSize="24"/>
         <Label Content="Select a Category" Grid.Row="1"/>
-        <ComboBox x:Name="cmbCategory" Grid.Row="2" SelectionChanged="cmbCategory_SelectionChanged"/>
+        <ComboBox x:Name="cmbCategory" Grid.Row="2" SelectionChanged="cmbCategory_SelectionChanged"
+                  ItemsSource="{Binding CatList}" 
+                  DisplayMemberPath="Name"
+                  SelectedValue="{Binding SelectedCategory}"/>
         <Label Content="Select Types:" Grid.Row="3"/>
-        <ListBox x:Name="lbxTypes" Grid.Row="4" SelectionMode="Extended" SelectionChanged="lbxTypes_SelectionChanged"/>
+        <ListBox x:Name="lbxTypes" Grid.Row="4" SelectionMode="Extended" SelectionChanged="lbxTypes_SelectionChanged"
+                 ItemsSource="{Binding ElemTypeList}"
+                 DisplayMemberPath="Name"/>
         <Label Grid.Row="5" Content="Select a Parameter:"/>
         <ComboBox x:Name="cmbParameter" Grid.Row="6" SelectionChanged="cmbParameter_SelectionChanged"/>
         <Label x:Name="lblValue" Grid.Row="7" Content="Set Parameter Value:"/>

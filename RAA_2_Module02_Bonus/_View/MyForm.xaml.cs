@@ -31,16 +31,18 @@ namespace RAA_2_Module02_Bonus
             InitializeComponent();
 
             viewModel = new _ViewModel.ViewModel(uiapp);
+            this.DataContext = viewModel;
         }
 
         private void cmbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            viewModel.UpdateTypes();
         }
 
         private void lbxTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            foreach (Element selectedType in lbxTypes.SelectedItems)
+                viewModel.SelectedElemTypes.Add(selectedType);
         }
 
         private void cmbParameter_SelectionChanged(object sender, SelectionChangedEventArgs e)

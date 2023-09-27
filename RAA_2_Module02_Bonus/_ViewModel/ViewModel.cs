@@ -30,12 +30,16 @@ namespace RAA_2_Module02_Bonus._ViewModel
 
         public void UpdateTypes()
         {
+            // check if the user selected a category
             if (SelectedCategory != null)
             {
+                // clear out the element type list
                 ElemTypeList.Clear();
 
+                // loop through the elements in the selected category
                 foreach (Element curElem in docModel.GetAllElementTypesByCategory(SelectedCategory))
                 {
+                    // add the current elemement to the type list
                     ElemTypeList.Add(curElem);
                 }
             }

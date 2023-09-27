@@ -30,7 +30,10 @@
                  ItemsSource="{Binding ElemTypeList}"
                  DisplayMemberPath="Name"/>
         <Label Grid.Row="5" Content="Select a Parameter:"/>
-        <ComboBox x:Name="cmbParameter" Grid.Row="6" SelectionChanged="cmbParameter_SelectionChanged"/>
+        <ComboBox x:Name="cmbParameter" Grid.Row="6" SelectionChanged="cmbParameter_SelectionChanged"
+                  ItemsSource="{Binding ParamList}"
+                  DisplayMemberPath="Definition.Name"
+                  SelectedValue="{Binding SelectedParam}"/>
         <Label x:Name="lblValue" Grid.Row="7" Content="Set Parameter Value:"/>
         <TextBox x:Name="tbxValue" Grid.Row="8"/>
         <StackPanel Grid.Row="9" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">

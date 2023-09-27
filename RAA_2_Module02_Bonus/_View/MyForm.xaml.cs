@@ -43,6 +43,8 @@ namespace RAA_2_Module02_Bonus
         {
             foreach (Element selectedType in lbxTypes.SelectedItems)
                 viewModel.SelectedElemTypes.Add(selectedType);
+
+            viewModel.UpdateParameters();
         }
 
         private void cmbParameter_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -1,70 +1,19 @@
-﻿using Autodesk.Revit.DB;
-using Autodesk.Revit.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Autodesk.Revit.DB;
 
 namespace RAA_2_Module02_Bonus._Model
 {
     public class DocModel
     {
         public Document Doc { get; set; }
-        public DocModel(Document curDoc)
+        public DocModel(Document doc)
         {
-            Doc = curDoc;
+            Doc = doc;
         }
-
-        internal List<Category> GetAllCategories()
-        {
-            // create a list to hold the categories
-            List<Category> m_Categories = new List<Category>();
-
-            // loop through the categories
-            foreach (Category curCat in Doc.Settings.Categories)
-            {
-                // add the current category to the list
-                m_Categories.Add(curCat);
-            }
-
-            // sort the list alphabetically
-            List<Category> m_SortedList = m_Categories.OrderBy(x => x.Name).ToList();
-
-            // return the sorted list
-            return m_SortedList;
-        }
-
-        internal Category GetCategoryByName(Document curDoc, string catName)
-        {
-            // get all the categories
-            List<Category> m_categories = GetAllCategories();
-
-            // loop through the list to find a match
-            foreach (Category curCat in m_categories)
-            {
-                if (curCat.Name == catName)
-                    return curCat;
-            }
-
-            return null;
-        }
-
-        internal static List<ElementType> GetElementTypesByName(Document doc, string catName, List<string> typeNames)
-        {
-            List<ElementType> m_types = new List<ElementType>();
-
-            foreach (string type in typeNames)
-            {
-                ElementType curType = GetElementTypeByName(doc, catName, type);
-
-                if (curType != null)
-                    m_types.Add(curType);
-            }
-
-            return m_types;
-        }
-
         internal List<Element> GetAllElementTypesByCategory(Category category)
         {
             FilteredElementCollector collector = new FilteredElementCollector(Doc);
@@ -77,37 +26,21 @@ namespace RAA_2_Module02_Bonus._Model
             return sortedList;
         }
 
-        private static ElementType GetElementTypeByName(Document doc, string catName, string name)
+        internal List<Parameter> GetAllParmatersFromElement(Element curType)
         {
-            FilteredElementCollector m_col = new FilteredElementCollector(doc)
-                .OfClass(typeof(ElementType));
+            List<Parameter> returnList = new List<Parameter>();
 
-            foreach (ElementType curType in m_col)
-            {
-                if (curType.Name == name && curType.Category.Name == catName)
-                    return curType;
-            }
-
-            return null;
-        }
-
-        internal List<Parameter> GetAllParametersFromElement(ElementType curType)
-        {
-            List<Parameter> m_returnList = new List<Parameter>();
-
-            // loop through the parameters of curType
             foreach (Parameter curParam in curType.Parameters)
             {
-                m_returnList.Add(curParam);
+                returnList.Add(curParam);
             }
 
-            return m_returnList;
+            return returnList;
         }
 
-        internal static Parameter GetParameterByName(Document doc, string catName, string typeName, string paramName)
+        internal Parameter GetParameterByName(string categoryName, string typeName, string paramName)
         {
-            ElementType curType = GetElementTypeByName(doc, catName, typeName);
-
+            ElementType curType = GetElementTypeByName(categoryName, typeName);
             Parameter curParam = curType.GetParameters(paramName).FirstOrDefault();
 
             if (curParam != null)
@@ -116,28 +49,84 @@ namespace RAA_2_Module02_Bonus._Model
             return null;
         }
 
-        internal static List<Parameter> GetParametersByName(Document curDoc, string catName, List<string> typeNames, string paramName)
+        internal List<Parameter> GetParametersByName(Category category, List<Element> types, Parameter param)
         {
-            List<Parameter> m_returnList = new List<Parameter>();
+            List<Parameter> returnList = new List<Parameter>();
 
-            foreach (string typeName in typeNames)
+            foreach (Element curType in types)
             {
-                Parameter curParam = GetParameterByName(curDoc, catName, typeName, paramName);
+                Parameter curParam = GetParameterByName(category.Name, curType.Name, param.Definition.Name);
 
                 if (curParam != null)
-                    m_returnList.Add(curParam);
+                    returnList.Add(curParam);
             }
 
-            return m_returnList;
+            return returnList;
         }
 
-        internal List<Parameter> GetAllParametersFromElementTypes(List<Element> selectedElemTypes)
+        internal List<Category> GetAllCategories()
+        {
+            List<Category> categories = new List<Category>();
+
+            foreach (Category curCat in Doc.Settings.Categories)
+            {
+                categories.Add(curCat);
+            }
+
+            List<Category> sortedList = categories.OrderBy(x => x.Name).ToList();
+
+            return sortedList;
+        }
+
+        internal Category GetCategoryByName(string categoryName)
+        {
+            List<Category> categories = GetAllCategories();
+
+            foreach (Category curCat in categories)
+            {
+                if (curCat.Name == categoryName)
+                    return curCat;
+            }
+
+            return null;
+        }
+
+        internal List<ElementType> GetElementTypesByName(string categoryName, List<string> typeNames)
+        {
+            List<ElementType> types = new List<ElementType>();
+
+            foreach (string type in typeNames)
+            {
+                ElementType currentType = GetElementTypeByName(categoryName, type);
+
+                if (currentType != null)
+                    types.Add(currentType);
+            }
+
+            return types;
+        }
+
+        private ElementType GetElementTypeByName(string categoryName, string name)
+        {
+            FilteredElementCollector collector = new FilteredElementCollector(Doc);
+            collector.OfClass(typeof(ElementType));
+
+            foreach (ElementType curType in collector)
+            {
+                if (curType.Name == name && curType.Category.Name == categoryName)
+                    return curType;
+            }
+
+            return null;
+        }
+
+        internal List<Parameter> GetAllParmatersFromElementTypes(List<Element> selectedElemTypes)
         {
             List<Parameter> paramList = new List<Parameter>();
 
             foreach (Element curType in selectedElemTypes)
             {
-                paramList.AddRange(GetAllParametersFromElement(curType));
+                paramList.AddRange(GetAllParmatersFromElement(curType));
             }
 
             List<Parameter> groupedList = paramList.GroupBy(x => x.Definition.Name).Select(x => x.First()).ToList();

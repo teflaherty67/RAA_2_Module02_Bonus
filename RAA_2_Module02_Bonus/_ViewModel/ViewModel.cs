@@ -24,6 +24,7 @@ namespace RAA_2_Module02_Bonus._ViewModel
 
             CatList = new ObservableCollection<Category>(docModel.GetAllCategories());
             ElemTypeList = new ObservableCollection<Element>();
+            ParamList = new ObservableCollection<Parameter>();
             SelectedElemTypes = new List<Element>();
         }
 
@@ -42,9 +43,10 @@ namespace RAA_2_Module02_Bonus._ViewModel
 
         public void UpdateParameters()
         {
-            if(SelectedElemTypes != null)
+            if (SelectedElemTypes != null)
             {
-                foreach (Parameter curParam in docModel.GetAllParametersFromElementTypes(SelectedElemTypes))
+                ParamList.Clear();
+                foreach (Parameter curParam in docModel.GetAllParmatersFromElementTypes(SelectedElemTypes))
                 {
                     ParamList.Add(curParam);
                 }

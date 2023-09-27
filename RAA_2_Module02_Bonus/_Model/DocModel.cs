@@ -106,7 +106,7 @@ namespace RAA_2_Module02_Bonus._Model
             return types;
         }
 
-        private ElementType GetElementTypeByName(string categoryName, string name)
+        internal ElementType GetElementTypeByName(string categoryName, string name)
         {
             FilteredElementCollector collector = new FilteredElementCollector(Doc);
             collector.OfClass(typeof(ElementType));

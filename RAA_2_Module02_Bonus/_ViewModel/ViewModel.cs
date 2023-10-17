@@ -17,6 +17,7 @@ namespace RAA_2_Module02_Bonus._ViewModel
         public ObservableCollection<Parameter> ParamList { get; set; }
         public Category SelectedCategory { get; set; }
         public List<Element> SelectedElemTypes { get; set; }
+        public Parameter SelectedParam { get; set; }
 
         public ViewModel(UIApplication uiapp)
         {

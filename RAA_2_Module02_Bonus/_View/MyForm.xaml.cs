@@ -49,7 +49,18 @@ namespace RAA_2_Module02_Bonus
 
         private void cmbParameter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            viewModel.UpdateParamValueString();
+
+            // these could be bound to the VM (I think)
+            tbxValue.Text = "";
+            tbxValue.IsEnabled = true;
+            lblValue.Content = viewModel.LabelContent;
+
+            if (viewModel.ParamDataType == "none")
+            {
+                tbxValue.Text = "Cannot set this parameter";
+                tbxValue.IsEnabled = false;
+            }
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)

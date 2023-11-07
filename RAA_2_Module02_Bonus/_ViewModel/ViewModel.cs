@@ -18,6 +18,9 @@ namespace RAA_2_Module02_Bonus._ViewModel
         public Category SelectedCategory { get; set; }
         public List<Element> SelectedElemTypes { get; set; }
         public Parameter SelectedParam { get; set; }
+        public string LabelContent { get; set; }
+        public string ParamDataType { get; set; }
+        public string NewValue { get; set; }
 
         public ViewModel(UIApplication uiapp)
         {
@@ -55,6 +58,30 @@ namespace RAA_2_Module02_Bonus._ViewModel
                 {
                     ParamList.Add(curParam);
                 }
+            }
+        }
+
+        internal void UpdateParamValueString()
+        {
+            if (SelectedParam.StorageType == StorageType.String)
+            {
+                LabelContent = "Set Parameter Value (as string):";
+                ParamDataType = "string";
+            }
+            else if (SelectedParam.StorageType == StorageType.Integer)
+            {
+                LabelContent = "Set Parameter Value (as integer):";
+                ParamDataType = "integer";
+            }
+            else if (SelectedParam.StorageType == StorageType.Double)
+            {
+                LabelContent = "Set Parameter Value (as double):";
+                ParamDataType = "double";
+            }
+            else
+            {
+                ParamDataType = "none";
+                LabelContent = "Set Parameter Value:";
             }
         }
     }

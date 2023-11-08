@@ -65,6 +65,7 @@ namespace RAA_2_Module02_Bonus
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            viewModel.NewValue = tbxValue.Text;
             this.Close();
             viewModel.Run();
         }

@@ -84,5 +84,37 @@ namespace RAA_2_Module02_Bonus._ViewModel
                 LabelContent = "Set Parameter Value:";
             }
         }
+
+        public void Run()
+        {
+            List<Parameter> paramList = docModel.GetParametersByName(SelectedCategory, SelectedElemTypes, SelectedParam);
+
+            using (Transaction t = new Transaction(docModel.Doc))
+            {
+                t.Start("Update parameter values");
+
+                foreach (Parameter param in paramList)
+                {
+                    if (ParamDataType == "double")
+                    {
+                        double paramDouble = Convert.ToDouble(NewValue);
+                        param.Set(paramDouble);
+                    }
+                    else if (ParamDataType == "integer")
+                    {
+                        int paramInt = Convert.ToInt32(NewValue);
+                        param.Set(paramInt);
+                    }
+                    else if (ParamDataType == "string")
+                    {
+                        param.Set(NewValue);
+                    }
+                }
+
+                t.Commit();
+            }
+
+            TaskDialog.Show("Complete", "Updated " + paramList.Count.ToString() + " types.");
+        }
     }
 }

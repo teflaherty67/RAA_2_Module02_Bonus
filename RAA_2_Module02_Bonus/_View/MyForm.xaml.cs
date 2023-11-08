@@ -66,6 +66,7 @@ namespace RAA_2_Module02_Bonus
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            viewModel.Run();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
